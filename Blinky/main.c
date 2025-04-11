@@ -6,35 +6,28 @@
 #include "util/delay.h"
 
 #include "include/GPIO.h"
-#include "include/LCD16X2.h"
 
 int main(){
 
-    char str[10] = "HELLO";
-    Port_config_t lcd_Command_Port = {
-        .DDRx = &DDRD,
-        .PORTx = &PORTD,
-        .PINx = &PIND
+    // Before using the GPIO always make a valid PORT configuration this helps to keep the code in order
+    Port_config_t config_PortA = {
+        .DDRx = &DDRA,
+        .PINx = &PINA,
+        .PORTx = &PORTA
     };
 
-    Port_config_t lcd_Data_Port = {
-        .DDRx = &DDRC,
-        .PORTx = &PORTC,
-        .PINx = &PINC
-    };
+    // Initalise the pin in output state and also pass the required port configuration
+    Pin_Init(&config_PortA, PIN_OUTPUT, 7);
 
-    LCD_config_t lcd_config = {
-        .Command_Port = &lcd_Command_Port,
-        .Data_Port = &lcd_Data_Port,
-        .En_pin = 5,
-        .Rs_pin = 7,
-        .Rw_pin = 6
-    };
+    while (1)
+    {
+        // Write Pin Function used to set the pin value of specified pin (7 in this case)
+        Write_Pin(&config_PortA, PIN_OUTPUT, 7, PIN_SET);
+        _delay_ms(500);
 
-    LCD_init(&lcd_config);
-    Display_Str(&lcd_config, str);
-    while(1){
-        _delay_ms(1000);
-
+        Write_Pin(&config_PortA, PIN_OUTPUT, 7, PIN_RESET);
+        _delay_ms(500);
+        
     }
+    
 }
