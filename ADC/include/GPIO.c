@@ -1,5 +1,7 @@
+#define F_CPU 8000000UL
 #include <avr/io.h>
 #include <avr/iom32.h>
+#include "util/delay.h"
 
 #include "GPIO.h"
 
