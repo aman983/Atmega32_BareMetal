@@ -9,7 +9,7 @@ USR_LIB_DIR = ${PRJ_DIR}/include
 CFLAGS = -std=c99 -Wall -g -Os -mmcu=${MCU} -DF_CPU=${F_CPU} -I. -I${IDIR} -I${USR_LIB_DIR}
 
 TARGET = main
-SRCS = main.c include/GPIO.c include/LCD16X2.c include/ADC.c
+SRCS = main.c $(wildcard include/*.c)
 LINUX_PORT = /dev/ttyACM0
 
 # All compilation and flashing process

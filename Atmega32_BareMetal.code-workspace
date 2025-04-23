@@ -11,7 +11,10 @@
 			"pgmspace.h": "c",
 			"stdbool.h": "c",
 			"chrono": "c",
-			"io.h": "c"
+			"io.h": "c",
+			"bit_bang_i2c.h": "c",
+			"iom32.h": "c",
+			"tm1637.h": "c"
 		}
 	}
 }
