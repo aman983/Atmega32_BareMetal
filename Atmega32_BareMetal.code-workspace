@@ -4,5 +4,13 @@
 			"path": "."
 		}
 	],
-	"settings": {}
+	"settings": {
+		"files.associations": {
+			"gpio.h": "c",
+			"delay.h": "c",
+			"pgmspace.h": "c",
+			"stdbool.h": "c",
+			"chrono": "c"
+		}
+	}
 }

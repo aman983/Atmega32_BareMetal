@@ -6,7 +6,6 @@
 #include "util/delay.h"
 
 #include "GPIO.h"
-#include "UART.h"
 #include "ADC.h"
 #include "LCD16X2.h"
 
@@ -37,12 +36,6 @@ int main(){
     
     LCD_init(&display_config);
 
-    UART_config_t config_uart = {
-        .Baud_rate = BAUD_9600
-    };
-
-    UART_Init(&config_uart);
-
    ADC_Config_t config_adc = {
     .Channel = CH_0,
     .Prescalar = CLK_128,
@@ -55,7 +48,6 @@ int main(){
     while(1){
         k = ADC_Get_MilliVolts();
         sprintf(buffer, "%d.%d%d%d V\n", (k / 1000), (k / 100)%10, (k / 10)%10, (k %10));
-        UART_send_Str(buffer);
         Display_Str(&display_config, buffer);
 
         _delay_ms(500);

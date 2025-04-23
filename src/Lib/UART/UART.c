@@ -1,6 +1,7 @@
+#define F_CPU 8000000UL
 #include <avr/io.h>
 #include <avr/iom32.h>
-
+#include <util/delay.h>
 #include "GPIO.h"
 #include "UART.h"
 
@@ -15,17 +16,18 @@ void UART_Init(UART_config_t *config_uart){
     Write_Pin(&Uart_Port, PIN_OUTPUT, 2, PIN_RESET);
 
     UCSRA = 0x00;
-    UCSRB |= (1 << 4) | (1 << 3);
-    UCSRC |= (1 << 3) | (1 << 2);
+    UCSRB |= 0x18;
+    UCSRC |= 0x06;
 
     UBRRH = 0x00;
-    UBRRL = config_uart->Baud_rate;
+    UBRRL = 0x33;
 }
 void UART_send_Str(char *str){
     while (*str)
     {
         UDR = *str;
         while ( (UCSRA & 0x40) == 0);
+        _delay_ms(10);
         str++;
     }   
 }
