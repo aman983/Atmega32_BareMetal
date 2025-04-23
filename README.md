@@ -36,7 +36,6 @@ Atmega32_Baremetal
 └── Atmega32_Datasheet.pdf
 
 ```
--> 
 ## How to Create a New Project ?
 - Run <code>./CreatePrj,sh</code> in the Terminal
 - This will appear <code>user@os$ Enter the Name of the Project to Create</code>
