@@ -1,5 +1,7 @@
+#define F_CPU 8000000UL
 #include <avr/io.h>
 #include <avr/iom32.h>
+#include "util/delay.h"
 #include <stdbool.h>
 
 #include "Bit_Bang_I2C.h"
@@ -7,6 +9,19 @@
 #include "TM1637.h"
 
 static Bit_Bang_I2C_Config_t I2C_Conf;
+
+void TM1637_Animate(TM1637_Config_t *display_config, uint8_t row, uint8_t column, uint8_t (*arr)[column], uint16_t Animtion_Speed_ms){
+  for(uint8_t frames = 0; frames < row; frames++){
+    for(uint8_t symbol = 0; symbol < 4; symbol++){
+      display_config->frame[symbol] = arr[frames][symbol];
+    }
+    TM1637_Send_Frame(display_config, display_config->frame);
+    for(uint8_t delay = 0; delay < Animtion_Speed_ms; delay++){
+      _delay_ms(1);
+    }
+    
+  }
+}
 
 void TM1637_Send_Frame(TM1637_Config_t *display_config, uint8_t *frame){
 
@@ -27,7 +42,6 @@ void TM1637_Send_Frame(TM1637_Config_t *display_config, uint8_t *frame){
     I2C_Stop(&I2C_Conf);
 
 }
-
 
 uint8_t Primitive_Number_Decoder(uint8_t Number){
     switch(Number) {

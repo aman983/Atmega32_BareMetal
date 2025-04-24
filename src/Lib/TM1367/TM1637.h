@@ -54,7 +54,7 @@
 #define DISP_BR DISP_SEG_B | DISP_SEG_C | DISP_SEG_D
 #define DISP_DN DISP_SEG_C | DISP_SEG_D | DISP_SEG_E
 #define DISP_BL DISP_SEG_D | DISP_SEG_E | DISP_SEG_F
-
+#define DISP_TL DISP_SEG_E | DISP_SEG_F | DISP_SEG_A
 
 typedef struct {
     Port_config_t *Driver_Port;
@@ -68,6 +68,7 @@ void TM1637_Init(TM1637_Config_t *display_config);
 void TM1637_Display_Number(TM1637_Config_t *display_config, int16_t Number);
 uint8_t Primitive_Number_Decoder(uint8_t Number);
 void TM1637_Send_Frame(TM1637_Config_t *display_config, uint8_t *frame);
+void TM1637_Animate(TM1637_Config_t *display_config, uint8_t row, uint8_t column, uint8_t (*arr)[column], uint16_t Animtion_Speed_ms);
 
 
 
