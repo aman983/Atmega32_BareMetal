@@ -14,7 +14,8 @@
 			"io.h": "c",
 			"bit_bang_i2c.h": "c",
 			"iom32.h": "c",
-			"tm1637.h": "c"
+			"tm1637.h": "c",
+			"uart.h": "c"
 		}
 	}
 }
